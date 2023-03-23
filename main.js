@@ -3,6 +3,7 @@ let shop = [];
 function addToCheckout(product) {
     shop.push(product);
     localStorage.setItem('shop', JSON.stringify(shop));
+    //renderInDropdown(product);
     location.href = "checkout.html";
 }
 // hej hej
@@ -26,6 +27,24 @@ function renderProductCard(element) {
     });
 
 }
+/*
+function renderInDropdown(element) {
+    let list = document.createElement('li');
+    list.classList.add('dropdown-item');
+    list.classList.add('dropdown-item-container');
+    list.innerHTML = `
+        <img src="${element.image}" class="" alt="${element.title}">
+        <p class="">${element.title}</p>
+        <p>${element.price}</p>
+        <button class="btn btn-primary" data-bs-toggle="modal">DELETE</button>
+        `;
+    document.querySelector('.dropdown-menu').appendChild(list);
+
+    list.querySelector('.btn').addEventListener('click', () => {
+        //ta bort från arrayen och localstorage
+    });
+}
+*/
 
 function renderCheckoutCard(element){
     let card = document.createElement('div');
