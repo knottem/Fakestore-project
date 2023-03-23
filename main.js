@@ -5,6 +5,7 @@ function addToCheckout(product) {
     localStorage.setItem('shop', JSON.stringify(shop));
     location.href = "checkout.html";
 }
+// hej hej
 
 function renderProductCard(element) {
     let card = document.createElement('div');
