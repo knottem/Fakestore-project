@@ -207,11 +207,14 @@ if (document.querySelector('.checkout')) {
     zip.addEventListener("blur", validateZip);
     city.addEventListener("blur", validateCity);
 
+    sendButton.addEventListener("click", validateForm);
+
+
     function validateForm() {
         console.log("validateForm");
         if (!validateName() || !validateEmail() || !validatePhone() || !validateAdress() || !validateZip() || !validateCity()) {
             sendButton.disabled = true;
-            return false;
+
         } else {
             sessionStorage.setItem('customer', JSON.stringify({
                 'name': name.value,
@@ -221,7 +224,7 @@ if (document.querySelector('.checkout')) {
                 'zip': zip.value,
                 'city': city.value
             }));
-            return true;
+            location.href="confirmation.html";
         }
     }
 }
