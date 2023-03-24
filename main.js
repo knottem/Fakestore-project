@@ -45,13 +45,13 @@ function renderProductCard(element) {
 
 }*/
 
-function renderProductCard(product) {
+function renderProductCard(element) {
     const card = document.createElement('div');
     card.classList.add('col-lg-3', 'col-md-6', 'mb-4');
     card.innerHTML = `
           <div class="card card-hover" style="border-radius: 15px;">
             <div class="text-center" style="height: 200px">
-              <img src="${product.image}" style="border-top-left-radius: 15px; border-top-right-radius: 15px; max-height: 200px;" class="img-fluid" alt="${product.title}"/>
+              <img src="${element.image}" style="border-top-left-radius: 15px; border-top-right-radius: 15px; max-height: 200px;" class="img-fluid" alt="${element.title}"/>
               <a href="#!">
                 <div class="mask"></div>
               </a>
@@ -59,8 +59,8 @@ function renderProductCard(product) {
             <div class="card-body pb-0">
               <div class="d-flex justify-content-between">
                 <div>
-                  <p><a href="#!" class="text-dark">${product.title}</a></p>
-                  <p class="small text-muted">${product.category}</p>
+                  <p><a href="#!" class="text-dark">${element.title}</a></p>
+                  <p class="small text-muted">${element.category}</p>
                 </div>
                 <div>
                 <div class="d-flex flex-row justify-content-end mt-1 mb-4 text-danger">
@@ -71,14 +71,14 @@ function renderProductCard(product) {
             <hr class="my-0" />
             <div class="card-body pb-0">
               <div class="d-flex justify-content-between">
-                <p><a href="#!" class="text-dark">$${product.price}</a></p>
-                <p class="small text-muted">${product.rating.rate} rating (${product.rating.count} votes)</p>
+                <p><a href="#!" class="text-dark">$${element.price}</a></p>
+                <p class="small text-muted">${element.rating.rate} rating (${element.rating.count} votes)</p>
               </div>
             </div>
             <hr class="my-0" />
             <div class="card-body pb-0">
             <div class="d-flex justify-content-between">
-              <p class="text-dark line-clamp">${product.description}</p>
+              <p class="text-dark line-clamp">${element.description}</p>
             </div>
           </div>
           <hr class="my-0" />
@@ -91,6 +91,12 @@ function renderProductCard(product) {
         </div>
     `;
     document.querySelector('.row').appendChild(card);
+
+    element.quantity = 1;
+
+    card.querySelector('.btn').addEventListener('click', () => {
+        addToCheckout(element);
+    });
 }
 
 function renderInDropdown(element) {
@@ -343,22 +349,5 @@ if (document.querySelector('.confirmation')) {
 
     const customer = JSON.parse(sessionStorage.getItem('customer'));
     const shop = JSON.parse(localStorage.getItem('shop'))
-
-
-    /*
-    shop.forEach(product => {
-        if (product.id in productsCheck) {
-          productsCheck[product.id].quantity += product.quantity
-        } else {
-          productsCheck[product.id] = product
-        }
-      })
-    renderCustomer(customer);
-    shop.forEach(renderConfirmationCard)
-    */
-
-
-
-
 
 }
