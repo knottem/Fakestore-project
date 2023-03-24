@@ -8,16 +8,17 @@ if(shop === null){
     }
 }
 */
+
 let shop = []
 
 function addToCheckout(product) {
-   
-    if(shop.some(element => element.id === product.id)){
+
+    if (shop.some(element => element.id === product.id)) {
         shop.find(element => element.id === product.id).quantity += 1;
     } else {
         shop.push(product);
     }
-    
+
     localStorage.setItem('shop', JSON.stringify(shop));
     //renderInDropdown(product);
     //location.href = "checkout.html";
@@ -44,38 +45,53 @@ function renderProductCard(element) {
 
 }*/
 
-function renderProductCard(element) {
-    let card = document.createElement('div');
-    card.classList.add('card', 'col-md-4', 'card-fixed-height');
+function renderProductCard(product) {
+    const card = document.createElement('div');
+    card.classList.add('col-lg-3', 'col-md-6', 'mb-4');
     card.innerHTML = `
-      <div class="row">
-        <div class="col-md-4">
-          <img src="${element.image}" class="img-fluid w-100" alt="card-horizontal-image">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">${element.title}</h5>
-            <p class="card-text line-clamp">${element.description}</p>
-            <p class="card-text"><small class="text-muted">${element.rating.rate} rating (${element.rating.count} votes)</small></p>
-            <p class="card-text">${element.price} $</p>
-            <button class="btn btn-primary position-absolute bottom-0 start-50 translate-middle" data-bs-toggle="modal">Buy this item</button>
+          <div class="card card-hover" style="border-radius: 15px;">
+            <div class="text-center" style="height: 200px">
+              <img src="${product.image}" style="border-top-left-radius: 15px; border-top-right-radius: 15px; max-height: 200px;" class="img-fluid" alt="${product.title}"/>
+              <a href="#!">
+                <div class="mask"></div>
+              </a>
+            </div>
+            <div class="card-body pb-0">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <p><a href="#!" class="text-dark">${product.title}</a></p>
+                  <p class="small text-muted">${product.category}</p>
+                </div>
+                <div>
+                <div class="d-flex flex-row justify-content-end mt-1 mb-4 text-danger">
+              </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-0" />
+            <div class="card-body pb-0">
+              <div class="d-flex justify-content-between">
+                <p><a href="#!" class="text-dark">$${product.price}</a></p>
+                <p class="small text-muted">${product.rating.rate} rating (${product.rating.count} votes)</p>
+              </div>
+            </div>
+            <hr class="my-0" />
+            <div class="card-body pb-0">
+            <div class="d-flex justify-content-between">
+              <p class="text-dark line-clamp">${product.description}</p>
+            </div>
           </div>
-         
+          <hr class="my-0" />
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center pb-2 mb-1">
+                <button type="button" class="btn btn-primary ">Buy now</button>
+              </div>
+            </div>
+          </div>
         </div>
-        
-      </div>
-      
     `;
-
-    document.querySelector('.shopping').appendChild(card);
-
-    element.quantity = 1;
-
-    card.querySelector('.btn').addEventListener('click', () => {
-        addToCheckout(element);
-    });
+    document.querySelector('.row').appendChild(card);
 }
-
 
 function renderInDropdown(element) {
     let list = document.createElement('li');
@@ -136,10 +152,10 @@ function renderConfirmationCard(element) {
 }
 
 if (document.querySelector('.shopping')) {
+    
     const TIMEOUT = 5000;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => { controller.abort(); }, TIMEOUT);
-
 
     //https://server.knotten.net/fakestore/
     //https://fakestoreapi.com/products
@@ -327,7 +343,7 @@ if (document.querySelector('.confirmation')) {
 
     const customer = JSON.parse(sessionStorage.getItem('customer'));
     const shop = JSON.parse(localStorage.getItem('shop'))
-   
+
 
     /*
     shop.forEach(product => {

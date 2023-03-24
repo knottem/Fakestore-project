@@ -1,22 +1,3 @@
-.card{
-    height: 350px;
-    
-}
-
-.line-clamp {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-
-.line-clamp:hover{
-    overflow:unset;
-}
-
-.checkout-image{
-    max-height: 100px;
-    width: auto;
-    max-width: 100px;
+body {
+    background-color: #f8f9fa;
 }
