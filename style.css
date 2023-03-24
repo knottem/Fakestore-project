@@ -1,6 +1,6 @@
-.card-fixed-height {
+.card{
     height: 350px;
-    /* or whatever height you want */
+    
 }
 
 .line-clamp {

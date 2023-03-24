@@ -44,34 +44,6 @@ function renderProductCard(element) {
 
 }*/
 
-
-function renderProductCard(element) {
-    let card = document.createElement('div');
-    card.classList.add('card');
-    card.classList.add('row-4');
-    card.innerHTML = `<div class="row col-4">
-    <div class="col-5 col-sm-4">
-      <img src="${element.image}" class="img-fluid w-100" alt="card-horizontal-image">
-    </div>
-    <div class="col-7 col-sm-8">
-      <div class="card-body">
-        <h5 class="card-title">${element.title}</h5>
-        <p class="card-text">${element.description}</p>
-        <p class="card-text"><small class="text-muted">${element.price}</small></p>
-      </div>
-      <button class="btn btn-primary" data-bs-toggle="modal">Buy this item</button>
-    </div>
-  </div>
-    `;
-    document.querySelector('.shopping').appendChild(card);
-
-    card.querySelector('.btn').addEventListener('click', () => {
-        addToCheckout(element);
-    });
-
-}
-
-
 function renderProductCard(element) {
     let card = document.createElement('div');
     card.classList.add('card', 'col-md-4', 'card-fixed-height');
@@ -103,8 +75,6 @@ function renderProductCard(element) {
         addToCheckout(element);
     });
 }
-
-
 
 
 function renderInDropdown(element) {
