@@ -70,7 +70,7 @@ function renderProductCard(element) {
     });
 
 }
-*/
+
 
 function renderProductCard(element) {
     let card = document.createElement('div');
