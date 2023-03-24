@@ -8,11 +8,11 @@ function addToCheckout(product) {
 }
 // hej hej
 
-function renderProductCard(element) {
+/*function renderProductCard(element) {
     let card = document.createElement('div');
     card.classList.add('card');
-    card.innerHTML = `
-        <img src="${element.image}" alt="${element.title}">
+    card.innerHTML = `<div class="image-container">
+        <img src="${element.image}" alt="${element.title}"></div>
         <h4>${element.title}</h4>
         <p>${element.price} $</p>
         <p class="desc">${element.description}</p>
@@ -26,9 +26,38 @@ function renderProductCard(element) {
         addToCheckout(element);
     });
 
+}*/
+
+
+function renderProductCard(element) {
+    let card = document.createElement('div');
+    card.classList.add('card');
+    card.classList.add('row-4');
+    card.innerHTML = `<div class="row col-4">
+    <div class="col-5 col-sm-4">
+      <img src="${element.image}" class="img-fluid w-100" alt="card-horizontal-image">
+    </div>
+    <div class="col-7 col-sm-8">
+      <div class="card-body">
+        <h5 class="card-title">${element.title}</h5>
+        <p class="card-text">${element.description}</p>
+        <p class="card-text"><small class="text-muted">${element.price}</small></p>
+      </div>
+      <button class="btn btn-primary" data-bs-toggle="modal">Buy this item</button>
+    </div>
+  </div>
+    `;
+    document.querySelector('.shopping').appendChild(card);
+
+    card.querySelector('.btn').addEventListener('click', () => {
+        addToCheckout(element);
+    });
+
 }
-/*
-function renderInDropdown(element) {
+
+
+
+/*function renderInDropdown(element) {
     let list = document.createElement('li');
     list.classList.add('dropdown-item');
     list.classList.add('dropdown-item-container');
@@ -43,10 +72,10 @@ function renderInDropdown(element) {
     list.querySelector('.btn').addEventListener('click', () => {
         //ta bort från arrayen och localstorage
     });
-}
-*/
+}*/
 
-function renderCheckoutCard(element){
+
+function renderCheckoutCard(element) {
     let card = document.createElement('div');
     card.classList.add('card');
     card.innerHTML = `
@@ -63,8 +92,8 @@ function renderCheckoutCard(element){
 if (document.querySelector('.shopping')) {
     const TIMEOUT = 5000;
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => {controller.abort();}, TIMEOUT);
-    
+    const timeoutId = setTimeout(() => { controller.abort(); }, TIMEOUT);
+
 
     //https://server.knotten.net/fakestore/
     //https://fakestoreapi.com/products
@@ -243,7 +272,7 @@ if (document.querySelector('.checkout')) {
                 'zip': zip.value,
                 'city': city.value
             }));
-            location.href="confirmation.html";
+            location.href = "confirmation.html";
         }
     }
 }

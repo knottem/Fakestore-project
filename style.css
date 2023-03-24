@@ -1,4 +1,6 @@
 
+    
+  
   .price {
     color: grey;
     font-size: 22px;
@@ -49,10 +51,14 @@
   align-items: center;
 }
 
+.image-container{
+  width: 90%;
+  height: 200px;
+}
+
 .card img {
-  max-width: 100%;
-  max-height: 50%;
-  object-fit: cover;
+  height: 200px;
+  max-width: 80%;
 }
 
 .card p {
