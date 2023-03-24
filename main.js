@@ -47,7 +47,7 @@ function renderProductCard(element) {
 
 function renderProductCard(element) {
     const card = document.createElement('div');
-    card.classList.add('col-lg-3', 'col-md-6', 'mb-4');
+    card.classList.add('col-lg-3', 'col-md-6', 'mb-4', 'card-container');
     card.innerHTML = `
           <div class="card card-hover" style="border-radius: 15px;">
             <div class="text-center" style="height: 200px">
@@ -59,7 +59,7 @@ function renderProductCard(element) {
             <div class="card-body pb-0">
               <div class="d-flex justify-content-between">
                 <div>
-                  <p><a href="#!" class="text-dark">${element.title}</a></p>
+                  <p class="title">${element.title}</p>
                   <p class="small text-muted">${element.category}</p>
                 </div>
                 <div>
@@ -77,7 +77,7 @@ function renderProductCard(element) {
             </div>
             <hr class="my-0" />
             <div class="card-body pb-0">
-            <div class="d-flex justify-content-between">
+            <div class="description-container">
               <p class="text-dark line-clamp">${element.description}</p>
             </div>
           </div>
@@ -88,7 +88,6 @@ function renderProductCard(element) {
               </div>
             </div>
           </div>
-        </div>
     `;
     document.querySelector('.row').appendChild(card);
 

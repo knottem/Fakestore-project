@@ -1,3 +1,39 @@
 body {
     background-color: #f8f9fa;
 }
+
+.description-container {
+    overflow: hidden;
+    min-height: 4.5em;
+    max-height: 4.5em;
+    position: relative;
+    transition: max-height 0.5s ease;
+}
+
+.card:hover .description-container {
+    max-height: 1000px;
+    transition: max-height 4s ease;
+}
+
+.line-clamp {
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    line-height: 1.5em; 
+    height: 4.5em; 
+}
+
+.card-container {
+    position: relative;
+}
+
+.card-container:hover {
+    z-index: 99; 
+}
+
+.card-container:hover .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
