@@ -1,84 +1,22 @@
+.card-fixed-height {
+    height: 350px;
+    /* or whatever height you want */
+}
 
-    
-  
-  .price {
-    color: grey;
-    font-size: 22px;
-  }
-  
-  .card button {
-    border: none;
-    outline: 0;
-    padding: 12px;
-    color: white;
-    background-color: #6a6969;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-  }
-  
-  .card button:hover {
-    opacity: 0.7;
-  }
-
-  .card img {
-    min-width: 100%;
-    max-height: 300px;
-    width: 300px;
-    object-fit: cover;
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-
-  .shopping {
-    display: flex;
-    max-width:100%;
-    height: auto;
-    flex-flow: row wrap;
-    align-content: center;
-    justify-content: center;
-    margin: 0 auto;
-    gap: 15px;
-  }
-
-.card {
-  width: 300px;
-  height: 600px;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
-.image-container{
-  width: 90%;
-  height: 200px;
+
+.line-clamp:hover{
+    overflow:unset;
 }
 
-.card img {
-  height: 200px;
-  max-width: 80%;
-}
-
-.card p {
-  font-size: 18px;
-  line-height: 1.5;
-  text-align: center;
-  margin: 10px;
-  max-height: 50%;
-}
-
-.desc{
-  overflow: scroll;
-  height: 200px;
-  width: 100%;
-}
-
-.dropdown-item-container{
-  display: flex;
-  flex-direction: row;
-  max-width: 100px;
-  height: 100px;
-  background-color: red;
+.checkout-image{
+    max-height: 100px;
+    width: auto;
+    max-width: 100px;
 }
