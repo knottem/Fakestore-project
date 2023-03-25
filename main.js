@@ -4,7 +4,7 @@ if(shop === null){
     shop = []
 } else {
     if (document.querySelector('.shopping')) {
-        shop.forEach(renderInDropdown)
+        //shop.forEach(renderInDropdown)
     }
 }
 */
@@ -24,8 +24,9 @@ function addToCheckout(product) {
     }
 
     localStorage.setItem('shop', JSON.stringify(shop));
-    //renderInDropdown(product);
     location.href = "checkout.html";
+
+    //renderInDropdown(product);
 }
 
 function renderProductCard(element) {
@@ -97,7 +98,7 @@ function renderProductCard(element) {
 
 function renderCheckoutCard(element) {
     const checkoutCard = document.createElement('div');
-    checkoutCard.classList.add('col-8', 'mb-4');
+    checkoutCard.classList.add('col-7', 'mb-4');
     checkoutCard.innerHTML = `
     <div class="card" style="border-radius: 15px;">
         <div class="row g-0">
@@ -113,6 +114,7 @@ function renderCheckoutCard(element) {
                         </div>
                         <div>
                             <p>$${element.price}</p>
+                            <p>Quantity: ${element.quantity}</p>
                             <p class="small text-muted">${element.rating.rate} rating (${element.rating.count} votes)</p>
                         </div>
                     </div>
@@ -201,12 +203,10 @@ if (document.querySelector('.checkout')) {
 
     if (shop != null) {
         shop.forEach(renderCheckoutCard);
-        priceLocation.innerHTML = `Total Sum: $${totalPrice}`;
+        priceLocation.innerText = `Total Sum: $${totalPrice.toFixed(2)}`;
     } else {
-        priceLocation.innerHTML = `Your cart is empty`;
+        priceLocation.innerText = `Your cart is empty`;
     }
-
-
 
     const total = {
         name: false,
@@ -305,7 +305,7 @@ if (document.querySelector('.checkout')) {
 
     function validateZip() {
         if (!zipPattern.test(zip.value) || zip.value.length > 6) {
-            zipError.innerHTML = "Zip must be filled out and contain only numbers in the format of (000 00) and not more than 6 characters";
+            zipError.innerHTML = "Zip must contain only numbers in the format of (000 00) and not more than 6 characters";
             total.zip = false;
             sendButton.disabled = true;
             return false;
