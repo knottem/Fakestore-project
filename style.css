@@ -7,12 +7,12 @@ body {
     min-height: 4.5em;
     max-height: 4.5em;
     position: relative;
-    transition: max-height 0.5s ease;
+    transition: max-height 2s ease;
 }
 
 .description-container.expanded {
     max-height: 1000px;
-    transition: max-height 4s ease 0.5s;
+    transition: max-height 4s ease 1s;
 }
 
 .line-clamp {
