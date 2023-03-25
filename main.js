@@ -83,8 +83,8 @@ function renderProductCard(element) {
           </div>
           <hr class="my-0" />
             <div class="card-body">
-              <div class="d-flex justify-content-between align-items-center pb-2 mb-1">
-                <button type="button" class="btn btn-primary ">Buy now</button>
+              <div class="d-flex justify-content-center align-items-center pb-2 mb-1">
+                <button type="button" class="btn btn-primary">Buy now</button>
               </div>
             </div>
           </div>
@@ -103,7 +103,7 @@ function renderProductCard(element) {
     descriptionContainerElement.addEventListener('mouseenter', () => {
         descriptionContainerElement.classList.add('expanded');
     });
-    
+
     card.addEventListener('mouseleave', () => {
         descriptionContainerElement.classList.remove('expanded');
     });
