@@ -8,11 +8,15 @@ if(shop === null){
     }
 }
 */
-
+//shopping cart
 let shop = []
 
-function addToCheckout(product) {
+//total price
+let totalPrice = 0
 
+
+//add to checkout function
+function addToCheckout(product) {
     if (shop.some(element => element.id === product.id)) {
         shop.find(element => element.id === product.id).quantity += 1;
     } else {
@@ -31,9 +35,6 @@ function renderProductCard(element) {
           <div class="card card-hover" style="border-radius: 15px;">
             <div class="text-center" style="height: 200px">
               <img src="${element.image}" style="border-top-left-radius: 15px; border-top-right-radius: 15px; max-height: 200px;" class="img-fluid" alt="${element.title}"/>
-              <a href="#!">
-                <div class="mask"></div>
-              </a>
             </div>
             <div class="card-body pb-0">
               <div class="d-flex justify-content-between">
@@ -50,7 +51,7 @@ function renderProductCard(element) {
             <hr class="my-0" />
             <div class="card-body pb-0">
               <div class="d-flex justify-content-between">
-                <p><a href="#!" class="text-dark">$${element.price}</a></p>
+                <p>$${element.price}</p>
                 <p class="small text-muted">${element.rating.rate} rating (${element.rating.count} votes)</p>
               </div>
             </div>
@@ -111,7 +112,7 @@ function renderCheckoutCard(element) {
                             <p class="small text-muted">${element.category}</p>
                         </div>
                         <div>
-                            <p><a href="#!" class="text-dark">$${element.price}</a></p>
+                            <p>$${element.price}</p>
                             <p class="small text-muted">${element.rating.rate} rating (${element.rating.count} votes)</p>
                         </div>
                     </div>
@@ -121,6 +122,8 @@ function renderCheckoutCard(element) {
     </div>
 `;
     document.querySelector('.checkout').appendChild(checkoutCard);
+
+    totalPrice += element.price * element.quantity;
 }
 
 function renderInDropdown(element) {
@@ -194,9 +197,16 @@ if (document.querySelector('.shopping')) {
 
 if (document.querySelector('.checkout')) {
     shop = JSON.parse(localStorage.getItem('shop'));
+    const priceLocation = document.getElementById('totalprice');
+
     if (shop != null) {
         shop.forEach(renderCheckoutCard);
+        priceLocation.innerHTML = `Total Sum: $${totalPrice}`;
+    } else {
+        priceLocation.innerHTML = `Your cart is empty`;
     }
+
+
 
     const total = {
         name: false,
@@ -334,12 +344,20 @@ if (document.querySelector('.checkout')) {
 
     sendButton.addEventListener("click", validateForm);
 
+    document.getElementById("buttonlocation").addEventListener("mouseover", function () {
+        if (!validateName() || !validateEmail() || !validatePhone() || !validateAdress() || !validateZip() || !validateCity()) {
+            if (buttonLocation.disabled == false) {
+                buttonLocation.disabled = true;
+            }
+        }
+    });
 
     function validateForm() {
-        console.log("validateForm");
-        if (!validateName() || !validateEmail() || !validatePhone() || !validateAdress() || !validateZip() || !validateCity()) {
+        if (!validateName() || !validateEmail() || !validatePhone() || !validateAdress() || !validateZip() || !validateCity() || shop == null) {
             sendButton.disabled = true;
-
+            if (shop == null) {
+                alert("Your cart is empty");
+            }
         } else {
             sessionStorage.setItem('customer', JSON.stringify({
                 'name': name.value,
