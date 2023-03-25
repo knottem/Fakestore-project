@@ -1,3 +1,9 @@
+/*variables*/
+:root{
+    --expand-duration: 4s;
+    --collapse-duration: 2s;
+}
+
 body {
     background-color: #f8f9fa;
 }
@@ -7,13 +13,15 @@ body {
     min-height: 4.5em;
     max-height: 4.5em;
     position: relative;
-    transition: max-height 2s ease;
+    transition: max-height var(--collapse-duration) ease;
 }
+
 
 .description-container.expanded {
     max-height: 1000px;
-    transition: max-height 4s ease 1s;
+    transition: max-height var(--expand-duration) ease 1s;
 }
+
 
 .line-clamp {
     line-height: 1.5em;
@@ -21,6 +29,7 @@ body {
     padding: 0;
 }
 
+/* fixed size of the title so it always takes 3 row since some objects have a longer title than others */
 .title {
     line-height: 1.5em; 
     height: 4.5em; 
@@ -28,4 +37,21 @@ body {
 
 .card-container:hover .card {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/*shows a gradient at the bottom of the description to indicate that there is more text*/
+.description-container.has-more-text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2em;
+    background: linear-gradient(to bottom, rgba(248, 249, 250, 0), rgba(248, 249, 250, 1));
+    transition: opacity var(--expand-duration) ease 0.5s;
+}
+
+/*hides the gradient when the description is expanded*/
+.description-container.expanded::after {
+    opacity: 0; 
 }

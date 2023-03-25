@@ -24,30 +24,9 @@ function addToCheckout(product) {
     //location.href = "checkout.html";
 }
 
-/*
-function renderProductCard(element) {
-    let card = document.createElement('div');
-    card.classList.add('card');
-    card.innerHTML = `<div class="image-container">
-        <img src="${element.image}" alt="${element.title}"></div>
-        <h4>${element.title}</h4>
-        <p>${element.price} $</p>
-        <p class="desc">${element.description}</p>
-        <p>${element.category}</p>
-        <p>${element.rating.rate} rating (${element.rating.count} votes)</p>
-        <button class="btn btn-primary" data-bs-toggle="modal">Buy this item</button>
-    `;
-    document.querySelector('.shopping').appendChild(card);
-
-    card.querySelector('.btn').addEventListener('click', () => {
-        addToCheckout(element);
-    });
-
-}*/
-
 function renderProductCard(element) {
     const card = document.createElement('div');
-    card.classList.add('col-lg-3', 'col-md-6', 'mb-4', 'card-container');
+    card.classList.add('col-sm-11', 'col-md-6', 'col-lg-3', 'col-xl-3', 'col-xxl-2', 'mb-4', 'card-container');
     card.innerHTML = `
           <div class="card card-hover" style="border-radius: 15px;">
             <div class="text-center" style="height: 200px">
@@ -98,6 +77,12 @@ function renderProductCard(element) {
     });
 
     const descriptionContainerElement = card.querySelector('.description-container');
+
+
+    //adds the class 'has-more-text' to the description container if the description is longer than the container and shows a gradient at the bottom when it's not expanded
+    if (descriptionContainerElement.scrollHeight > descriptionContainerElement.clientHeight) {
+        descriptionContainerElement.classList.add('has-more-text');
+    }
 
     //made the description expand on hover and collapse on mouseleave of the entire card
     descriptionContainerElement.addEventListener('mouseenter', () => {
