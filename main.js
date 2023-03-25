@@ -21,7 +21,7 @@ function addToCheckout(product) {
 
     localStorage.setItem('shop', JSON.stringify(shop));
     //renderInDropdown(product);
-    //location.href = "checkout.html";
+    location.href = "checkout.html";
 }
 
 function renderProductCard(element) {
@@ -94,6 +94,35 @@ function renderProductCard(element) {
     });
 }
 
+function renderCheckoutCard(element) {
+    const checkoutCard = document.createElement('div');
+    checkoutCard.classList.add('col-8', 'mb-4');
+    checkoutCard.innerHTML = `
+    <div class="card" style="border-radius: 15px;">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src="${element.image}" style="border-top-left-radius: 15px; border-bottom-left-radius: 15px; max-height: 150px; object-fit: cover;" class="img-fluid" alt="${element.title}" />
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="title">${element.title}</p>
+                            <p class="small text-muted">${element.category}</p>
+                        </div>
+                        <div>
+                            <p><a href="#!" class="text-dark">$${element.price}</a></p>
+                            <p class="small text-muted">${element.rating.rate} rating (${element.rating.count} votes)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+`;
+    document.querySelector('.checkout').appendChild(checkoutCard);
+}
+
 function renderInDropdown(element) {
     let list = document.createElement('li');
     list.classList.add('dropdown-item');
@@ -109,21 +138,6 @@ function renderInDropdown(element) {
     list.querySelector('.btn').addEventListener('click', () => {
         //ta bort från arrayen och localstorage
     });
-}
-
-
-function renderCheckoutCard(element) {
-    let card = document.createElement('div');
-    card.classList.add('card');
-    card.innerHTML = `
-        <img src="${element.image}" alt="${element.title}">
-        <h4>${element.title}</h4>
-        <p>${element.price} $</p>
-        <p>${element.description}</p>
-        <p>${element.category}</p>
-        <p>${element.rating.rate} rating (${element.rating.count} votes)</p>
-    `;
-    document.querySelector('.checkout').appendChild(card);
 }
 
 function renderCustomer(customer) {
@@ -153,7 +167,7 @@ function renderConfirmationCard(element) {
 }
 
 if (document.querySelector('.shopping')) {
-    
+
     const TIMEOUT = 5000;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => { controller.abort(); }, TIMEOUT);
