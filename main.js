@@ -96,6 +96,17 @@ function renderProductCard(element) {
     card.querySelector('.btn').addEventListener('click', () => {
         addToCheckout(element);
     });
+
+    // Added eventlistener so that the description expands when hovering over the card and collapses when leaving the entire card
+    const cardElement = card.querySelector('.card');
+    const descriptionContainerElement = card.querySelector('.description-container');
+
+    cardElement.addEventListener('mouseenter', () => {
+        descriptionContainerElement.classList.add('expanded');
+    });
+    cardElement.addEventListener('mouseleave', () => {
+        descriptionContainerElement.classList.remove('expanded');
+    });
 }
 
 function renderInDropdown(element) {

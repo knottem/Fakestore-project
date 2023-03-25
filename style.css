@@ -10,7 +10,7 @@ body {
     transition: max-height 0.5s ease;
 }
 
-.description-container:hover {
+.description-container.expanded {
     max-height: 1000px;
     transition: max-height 4s ease 0.5s;
 }
