@@ -98,7 +98,7 @@ function renderProductCard(element) {
 
 function renderCheckoutCard(element) {
     const checkoutCard = document.createElement('div');
-    checkoutCard.classList.add('col-7', 'mb-4');
+    checkoutCard.classList.add('col-sm-11', 'col-md-11', 'col-lg-7', 'mb-4');
     checkoutCard.innerHTML = `
     <div class="card" style="border-radius: 15px;">
         <div class="row g-0">
