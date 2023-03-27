@@ -1,5 +1,5 @@
 /*variables*/
-:root{
+:root {
     --expand-duration: 4s;
     --collapse-duration: 2s;
 }
@@ -18,7 +18,7 @@ body {
 
 
 .description-container.expanded {
-    max-height: 1000px;
+    max-height: 500px;
     transition: max-height var(--expand-duration) ease 1s;
 }
 
@@ -31,8 +31,8 @@ body {
 
 /* fixed size of the title so it always takes 3 row since some objects have a longer title than others */
 .title {
-    line-height: 1.5em; 
-    height: 4.5em; 
+    line-height: 1.5em;
+    height: 4.5em;
 }
 
 .card-container:hover .card {
@@ -53,5 +53,5 @@ body {
 
 /*hides the gradient when the description is expanded*/
 .description-container.expanded::after {
-    opacity: 0; 
+    opacity: 0;
 }

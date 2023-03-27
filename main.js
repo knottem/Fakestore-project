@@ -1,3 +1,6 @@
+"use strict";
+import { products } from "./products.js";
+
 /*let shop = JSON.parse(localStorage.getItem('shop'));
 
 if(shop === null){
@@ -65,7 +68,8 @@ function renderProductCard(element) {
           <hr class="my-0" />
             <div class="card-body">
               <div class="d-flex justify-content-center align-items-center pb-2 mb-1">
-                <button type="button" class="btn btn-primary">Buy now</button>
+               
+                <button class="btn btn-primary">Buy now</button>
               </div>
             </div>
           </div>
@@ -376,5 +380,7 @@ if (document.querySelector('.confirmation')) {
 
     const customer = JSON.parse(sessionStorage.getItem('customer'));
     const shop = JSON.parse(localStorage.getItem('shop'))
+    shop.forEach(renderConfirmationCard);
+    renderCustomer(customer);
 
 }
