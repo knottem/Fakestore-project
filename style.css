@@ -55,3 +55,7 @@ body {
 .description-container.expanded::after {
     opacity: 0;
 }
+
+li {
+    list-style-type: none;
+}
