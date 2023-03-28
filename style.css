@@ -59,19 +59,12 @@ body {
     opacity: 0;
 }
 
-
 li {
     list-style-type: none;
-    }
-.picture {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .content{
     flex: 1;
-
 }
 
 footer {
@@ -82,10 +75,10 @@ footer {
 .img-container {
     height: 400px;
     overflow: hidden;
-  }
+}
   
-  .img-container img {
+.img-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
+}
