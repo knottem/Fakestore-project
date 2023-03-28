@@ -163,7 +163,7 @@ function validateForm() {
         }
     } else {
         sessionStorage.setItem('customer', JSON.stringify({
-            'name': name.value,
+            'name': names.value,
             'email': email.value,
             'phone': phone.value,
             'address': address.value,
