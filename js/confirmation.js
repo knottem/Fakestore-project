@@ -1,7 +1,17 @@
 const customer = JSON.parse(sessionStorage.getItem('customer'));
 const shop = JSON.parse(localStorage.getItem('shop'))
-shop.forEach(getProducts);
 
+
+if(shop == null || customer == null){
+    if(shop == null){
+    document.getElementById('item').innerHTML = `Your cart is empty, please go back to the shop and add some items to your cart.`;
+    }
+    if(customer == null){
+        document.getElementById('customer').innerHTML = `Please fill in your information to complete your order.`;
+    }
+} else {
+
+shop.forEach(getProducts);
 
 function getProducts(element){
     //"https://server.knotten.net/fakestore/" + id
@@ -55,4 +65,5 @@ function renderCustomer(customer) {
     `;
 
     document.getElementById('customer').appendChild(card);
+}
 }
