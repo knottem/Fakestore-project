@@ -27,14 +27,14 @@ const addressError = document.getElementById("addressError");
 const zipError = document.getElementById("zipError");
 const cityError = document.getElementById("cityError");
 
-const name = document.getElementById("name");
+const names = document.getElementById("name");
 const email = document.getElementById("email");
 const phone = document.getElementById("phone");
 const address = document.getElementById("address");
 const zip = document.getElementById("zip");
 const city = document.getElementById("city");
 
-const phonePattern = /[0-9()-]+/;
+const phonePattern = /^[0-9()-]+$/;
 
 //const zipPattern = /^\d{3} \d{2}$/;
 //nya zippattern från en stackoverflow fråga
@@ -43,7 +43,7 @@ const zipPattern = /^(?=(\D*\d){5}\D*$)(?=[^ ]* ?[^ ]*$)[\d ]*$/;
 const sendButton = document.getElementById("sendButton");
 
 function validateName() {
-    if (name.value.length < 2 || name.value.length > 50) {
+    if (names.value.length < 2 || names.value.length > 50) {
         nameError.innerHTML = "Name must be filled out and at least 2 characters long and not more than 50 characters";
         total.name = false;
         sendButton.disabled = true;
@@ -91,8 +91,8 @@ function validatePhone() {
 }
 
 function validateAdress() {
-    if (address.value.length < 1 || address.value.length > 50) {
-        addressError.innerHTML = "Address must be filled out and not more than 50 characters";
+    if (address.value.length < 4 || address.value.length > 50) {
+        addressError.innerHTML = "Address must be atleast 4 and not more than 50 characters";
         total.address = false;
         sendButton.disabled = true;
         return false;
@@ -123,8 +123,8 @@ function validateZip() {
 }
 
 function validateCity() {
-    if (city.value.length < 1 || city.value.length > 50) {
-        cityError.innerHTML = "City must be filled out and not more than 50 characters";
+    if (city.value.length < 2 || city.value.length > 50) {
+        cityError.innerHTML = "City must be atleast 2 and not more than 50 characters";
         total.city = false;
         sendButton.disabled = true;
         return false;
@@ -138,7 +138,7 @@ function validateCity() {
     }
 }
 
-name.addEventListener("blur", validateName);
+names.addEventListener("blur", validateName);
 email.addEventListener("blur", validateEmail);
 phone.addEventListener("blur", validatePhone);
 address.addEventListener("blur", validateAdress);
