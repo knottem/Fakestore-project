@@ -1,81 +1,136 @@
+"use strict";
+import { products } from "./products.js";
+
 /*let shop = JSON.parse(localStorage.getItem('shop'));
 
 if(shop === null){
     shop = []
 } else {
     if (document.querySelector('.shopping')) {
-        shop.forEach(renderInDropdown)
+        //shop.forEach(renderInDropdown)
     }
 }
 */
+//shopping cart
 let shop = []
 
+//total price
+let totalPrice = 0
+
+
+//add to checkout function
 function addToCheckout(product) {
-   
-    if(shop.some(element => element.id === product.id)){
+    if (shop.some(element => element.id === product.id)) {
         shop.find(element => element.id === product.id).quantity += 1;
     } else {
         shop.push(product);
     }
-    
+
     localStorage.setItem('shop', JSON.stringify(shop));
+    location.href = "checkout.html";
+
     //renderInDropdown(product);
-    //location.href = "checkout.html";
 }
 
-/*
 function renderProductCard(element) {
-    let card = document.createElement('div');
-    card.classList.add('card');
-    card.innerHTML = `<div class="image-container">
-        <img src="${element.image}" alt="${element.title}"></div>
-        <h4>${element.title}</h4>
-        <p>${element.price} $</p>
-        <p class="desc">${element.description}</p>
-        <p>${element.category}</p>
-        <p>${element.rating.rate} rating (${element.rating.count} votes)</p>
-        <button class="btn btn-primary" data-bs-toggle="modal">Buy this item</button>
-    `;
-    document.querySelector('.shopping').appendChild(card);
-
-    card.querySelector('.btn').addEventListener('click', () => {
-        addToCheckout(element);
-    });
-
-}*/
-
-function renderProductCard(element) {
-    let card = document.createElement('div');
-    card.classList.add('card', 'col-md-4', 'card-fixed-height');
+    const card = document.createElement('div');
+    card.classList.add('col-sm-11', 'col-md-6', 'col-lg-3', 'col-xl-3', 'col-xxl-2', 'mb-4', 'card-container');
     card.innerHTML = `
-      <div class="row">
-        <div class="col-md-4">
-          <img src="${element.image}" class="img-fluid w-100" alt="card-horizontal-image">
-        </div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h5 class="card-title">${element.title}</h5>
-            <p class="card-text line-clamp">${element.description}</p>
-            <p class="card-text"><small class="text-muted">${element.rating.rate} rating (${element.rating.count} votes)</small></p>
-            <p class="card-text">${element.price} $</p>
-            <button class="btn btn-primary position-absolute bottom-0 start-50 translate-middle" data-bs-toggle="modal">Buy this item</button>
+          <div class="card card-hover" style="border-radius: 15px;">
+            <div class="text-center" style="height: 200px">
+              <img src="${element.image}" style="border-top-left-radius: 15px; border-top-right-radius: 15px; max-height: 200px;" class="img-fluid" alt="${element.title}"/>
+            </div>
+            <div class="card-body pb-0">
+              <div class="d-flex justify-content-between">
+                <div>
+                  <p class="title">${element.title}</p>
+                  <p class="small text-muted">${element.category}</p>
+                </div>
+                <div>
+                <div class="d-flex flex-row justify-content-end mt-1 mb-4 text-danger">
+              </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-0" />
+            <div class="card-body pb-0">
+              <div class="d-flex justify-content-between">
+                <p>$${element.price}</p>
+                <p class="small text-muted">${element.rating.rate} rating (${element.rating.count} votes)</p>
+              </div>
+            </div>
+            <hr class="my-0" />
+            <div class="card-body pb-0">
+            <div class="description-container">
+              <p class="text-dark line-clamp">${element.description}</p>
+            </div>
           </div>
-         
-        </div>
-        
-      </div>
-      
+          <hr class="my-0" />
+            <div class="card-body">
+              <div class="d-flex justify-content-center align-items-center pb-2 mb-1">
+               
+                <button class="btn btn-primary">Buy now</button>
+              </div>
+            </div>
+          </div>
     `;
-
-    document.querySelector('.shopping').appendChild(card);
+    document.querySelector('.row').appendChild(card);
 
     element.quantity = 1;
 
     card.querySelector('.btn').addEventListener('click', () => {
         addToCheckout(element);
     });
+
+    const descriptionContainerElement = card.querySelector('.description-container');
+
+
+    //adds the class 'has-more-text' to the description container if the description is longer than the container and shows a gradient at the bottom when it's not expanded
+    if (descriptionContainerElement.scrollHeight > descriptionContainerElement.clientHeight) {
+        descriptionContainerElement.classList.add('has-more-text');
+    }
+
+    //made the description expand on hover and collapse on mouseleave of the entire card
+    descriptionContainerElement.addEventListener('mouseenter', () => {
+        descriptionContainerElement.classList.add('expanded');
+    });
+
+    card.addEventListener('mouseleave', () => {
+        descriptionContainerElement.classList.remove('expanded');
+    });
 }
 
+function renderCheckoutCard(element) {
+    const checkoutCard = document.createElement('div');
+    checkoutCard.classList.add('col-sm-11', 'col-md-11', 'col-lg-7', 'mb-4');
+    checkoutCard.innerHTML = `
+    <div class="card" style="border-radius: 15px;">
+        <div class="row g-0">
+            <div class="col-md-2">
+                <img src="${element.image}" style="border-top-left-radius: 15px; border-bottom-left-radius: 15px; max-height: 150px; object-fit: cover;" class="img-fluid" alt="${element.title}" />
+            </div>
+            <div class="col-md-10">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <p class="title">${element.title}</p>
+                            <p class="small text-muted">${element.category}</p>
+                        </div>
+                        <div>
+                            <p>$${element.price}</p>
+                            <p>Quantity: ${element.quantity}</p>
+                            <p class="small text-muted">${element.rating.rate} rating (${element.rating.count} votes)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+`;
+    document.querySelector('.checkout').appendChild(checkoutCard);
+
+    totalPrice += element.price * element.quantity;
+}
 
 function renderInDropdown(element) {
     let list = document.createElement('li');
@@ -92,21 +147,6 @@ function renderInDropdown(element) {
     list.querySelector('.btn').addEventListener('click', () => {
         //ta bort från arrayen och localstorage
     });
-}
-
-
-function renderCheckoutCard(element) {
-    let card = document.createElement('div');
-    card.classList.add('card');
-    card.innerHTML = `
-        <img src="${element.image}" alt="${element.title}">
-        <h4>${element.title}</h4>
-        <p>${element.price} $</p>
-        <p>${element.description}</p>
-        <p>${element.category}</p>
-        <p>${element.rating.rate} rating (${element.rating.count} votes)</p>
-    `;
-    document.querySelector('.checkout').appendChild(card);
 }
 
 function renderCustomer(customer) {
@@ -136,10 +176,10 @@ function renderConfirmationCard(element) {
 }
 
 if (document.querySelector('.shopping')) {
+
     const TIMEOUT = 5000;
     const controller = new AbortController();
     const timeoutId = setTimeout(() => { controller.abort(); }, TIMEOUT);
-
 
     //https://server.knotten.net/fakestore/
     //https://fakestoreapi.com/products
@@ -163,8 +203,13 @@ if (document.querySelector('.shopping')) {
 
 if (document.querySelector('.checkout')) {
     shop = JSON.parse(localStorage.getItem('shop'));
+    const priceLocation = document.getElementById('totalprice');
+
     if (shop != null) {
         shop.forEach(renderCheckoutCard);
+        priceLocation.innerText = `Total Sum: $${totalPrice.toFixed(2)}`;
+    } else {
+        priceLocation.innerText = `Your cart is empty`;
     }
 
     const total = {
@@ -264,7 +309,7 @@ if (document.querySelector('.checkout')) {
 
     function validateZip() {
         if (!zipPattern.test(zip.value) || zip.value.length > 6) {
-            zipError.innerHTML = "Zip must be filled out and contain only numbers in the format of (000 00) and not more than 6 characters";
+            zipError.innerHTML = "Zip must contain only numbers in the format of (000 00) and not more than 6 characters";
             total.zip = false;
             sendButton.disabled = true;
             return false;
@@ -303,12 +348,20 @@ if (document.querySelector('.checkout')) {
 
     sendButton.addEventListener("click", validateForm);
 
+    document.getElementById("buttonlocation").addEventListener("mouseover", function () {
+        if (!validateName() || !validateEmail() || !validatePhone() || !validateAdress() || !validateZip() || !validateCity()) {
+            if (buttonLocation.disabled == false) {
+                buttonLocation.disabled = true;
+            }
+        }
+    });
 
     function validateForm() {
-        console.log("validateForm");
-        if (!validateName() || !validateEmail() || !validatePhone() || !validateAdress() || !validateZip() || !validateCity()) {
+        if (!validateName() || !validateEmail() || !validatePhone() || !validateAdress() || !validateZip() || !validateCity() || shop == null) {
             sendButton.disabled = true;
-
+            if (shop == null) {
+                alert("Your cart is empty");
+            }
         } else {
             sessionStorage.setItem('customer', JSON.stringify({
                 'name': name.value,
@@ -327,22 +380,7 @@ if (document.querySelector('.confirmation')) {
 
     const customer = JSON.parse(sessionStorage.getItem('customer'));
     const shop = JSON.parse(localStorage.getItem('shop'))
-   
-
-    /*
-    shop.forEach(product => {
-        if (product.id in productsCheck) {
-          productsCheck[product.id].quantity += product.quantity
-        } else {
-          productsCheck[product.id] = product
-        }
-      })
+    shop.forEach(renderConfirmationCard);
     renderCustomer(customer);
-    shop.forEach(renderConfirmationCard)
-    */
-
-
-
-
 
 }

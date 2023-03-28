@@ -11,9 +11,12 @@
 </head>
 
 <body>
-  <div class="checkout">
-  </div>
-  <div class="container">
+  <h2 class="text-center">Shopping Cart:</h1>
+    <div class="checkout row d-flex justify-content-center"></div>
+    <div class="d-flex justify-content-center my-4">
+      <h5 id="totalprice">&nbsp;</h5>
+    </div>
+    <div class="container col-sm-10 col-md-6 col-lg-6">
       <div class="form-group row">
         <label for="fname" class="col-sm-2 col-form-label">Name</label>
         <div class="col-sm-10">
@@ -57,13 +60,13 @@
         </div>
       </div>
       <div class="form-group row">
-        <div class="col-sm-10 offset-sm-2">
+        <div class="col-sm-10 offset-sm-2" id="buttonlocation">
           <button id="sendButton" type="submit" class="btn btn-primary" disabled>Send</button>
         </div>
       </div>
-  </div>
+    </div>
 
-  <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 
 </html>
