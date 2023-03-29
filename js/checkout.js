@@ -1,3 +1,4 @@
+"use strict";
 let shop = JSON.parse(localStorage.getItem('shop'));
 const priceLocation = document.getElementById('totalprice');
 console.log(shop);
@@ -211,5 +212,5 @@ function renderCheckoutCard(element, quantity) {
 `;
     document.querySelector('.checkout').appendChild(checkoutCard);
 
-    totalPrice += element.price * element.quantity;
+    totalPrice += element.price * quantity;
 }
