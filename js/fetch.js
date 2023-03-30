@@ -1,4 +1,4 @@
-import { products } from "./js/products.js";
+import { products } from "./products.js";
 
 export function fetchData(functionName, shop = null, text = null) {
   const timeout = 5000;
