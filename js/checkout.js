@@ -1,12 +1,13 @@
+"use strict";
 let shop = JSON.parse(localStorage.getItem('shop'));
 const priceLocation = document.getElementById('totalprice');
-console.log(shop);
+
+import { fetchData } from "../test.js";
 
 let totalPrice = 0;
 
 if (shop != null) {
-    shop.forEach(getProducts);
-    priceLocation.innerText = `Total Sum: $${totalPrice.toFixed(2)}`;
+    fetchData(renderCheckoutCard, shop);
 } else {
     priceLocation.innerText = `Your cart is empty`;
 }
@@ -174,14 +175,6 @@ function validateForm() {
     }
 }
 
-function getProducts(element){
-    console.log(element)
-    //"https://server.knotten.net/fakestore/" + id
-    fetch('https://fakestoreapi.com/products/' + element[0])
-    .then(res=>res.json())
-        .then(data=>renderCheckoutCard(data, element[1]))
-}
-
 function renderCheckoutCard(element, quantity) {
     const checkoutCard = document.createElement('div');
     checkoutCard.classList.add('col-sm-11', 'col-md-11', 'col-lg-7', 'mb-4');
@@ -211,5 +204,7 @@ function renderCheckoutCard(element, quantity) {
 `;
     document.querySelector('.checkout').appendChild(checkoutCard);
 
-    totalPrice += element.price * element.quantity;
+    totalPrice += element.price * quantity;
+    console.log(totalPrice);
+    priceLocation.innerText = `Total Sum: $${totalPrice.toFixed(2)}`;
 }

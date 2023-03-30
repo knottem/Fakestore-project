@@ -1,29 +1,9 @@
 "use strict";
-import { products } from "./products.js";
+import { fetchData } from "../test.js";
 
 let shop = []
 
-const timeout = 5000;
-const controller = new AbortController();
-const timeoutId = setTimeout(() => { controller.abort(); }, timeout);
-
-//https://server.knotten.net/fakestore/
-//https://fakestoreapi.com/products
-fetch('https://server.knotten.net/fakestore/', { signal: controller.signal })
-  .then(res => res.json()
-    .then(data => {
-      console.log("fetch success from api");
-      data.forEach(renderProductCard);
-      clearTimeout(timeoutId);
-    })
-    .catch(error => {
-      console.log(`Failed to parse response as JSON: ${error}`);
-      products.forEach(renderProductCard);
-    }))
-  .catch(error => {
-    console.log(`Failed to fetch api after ${timeout / 1000} seconds, ` + error);
-    products.forEach(renderProductCard);
-  });
+fetchData(renderProductCard);
 
 //add to checkout function
 function addToCheckout(id, quantity) {
