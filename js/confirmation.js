@@ -1,5 +1,5 @@
 "use strict";
-import { fetchData } from "../test.js";
+import { fetchData } from "./fetch.js";
 
 const customer = JSON.parse(sessionStorage.getItem('customer'));
 const shop = JSON.parse(localStorage.getItem('shop'))
@@ -47,7 +47,6 @@ function renderConfirmationCard(element, quantity) {
 `;
     document.getElementById('item').appendChild(confirmationCard);
 }
-
 
 
 function renderCustomer(customer) {
