@@ -1,8 +1,9 @@
 "use strict";
-import { fetchData } from "../test.js";
+import { fetchData } from "./fetch.js";
 
 let shop = []
 
+//fetch data from API
 fetchData(renderProductCard);
 
 //add to checkout function

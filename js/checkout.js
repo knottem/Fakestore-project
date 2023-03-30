@@ -2,7 +2,7 @@
 let shop = JSON.parse(localStorage.getItem('shop'));
 const priceLocation = document.getElementById('totalprice');
 
-import { fetchData } from "../test.js";
+import { fetchData } from "./fetch.js";
 
 let totalPrice = 0;
 
@@ -36,9 +36,6 @@ const zip = document.getElementById("zip");
 const city = document.getElementById("city");
 
 const phonePattern = /^[0-9()-]+$/;
-
-//const zipPattern = /^\d{3} \d{2}$/;
-//nya zippattern från en stackoverflow fråga
 const zipPattern = /^(?=(\D*\d){5}\D*$)(?=[^ ]* ?[^ ]*$)[\d ]*$/;
 
 const sendButton = document.getElementById("sendButton");

@@ -1,5 +1,5 @@
 "use strict";
-import { fetchData } from "../test.js";
+import { fetchData } from "./fetch.js";
 
 const customer = JSON.parse(sessionStorage.getItem('customer'));
 const shop = JSON.parse(localStorage.getItem('shop'))
@@ -51,12 +51,9 @@ if (shop == null || customer == null) {
 
 
     function renderCustomer(customer) {
-
         let card = document.createElement('div');
         card.classList.add('col-sm-11', 'col-md-11', 'col-lg-7', 'mb-4');
         card.innerHTML = `
-
-
             <div class="card-body">
                 <div class="col-12 d-flex justify-content-center">
                     <div>
@@ -68,8 +65,6 @@ if (shop == null || customer == null) {
                     </div>
                 </div>
             </div>
-    
-        
     `;
 
         document.getElementById('customer').appendChild(card);
