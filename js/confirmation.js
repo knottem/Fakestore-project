@@ -1,3 +1,6 @@
+"use strict";
+import { fetchData } from "../test.js";
+
 const customer = JSON.parse(sessionStorage.getItem('customer'));
 const shop = JSON.parse(localStorage.getItem('shop'))
 
@@ -11,15 +14,8 @@ if(shop == null || customer == null){
     }
 } else {
 
-shop.forEach(getProducts);
-
-function getProducts(element){
-    //"https://server.knotten.net/fakestore/" + id
-    fetch('https://fakestoreapi.com/products/' + element[0])
-    .then(res=>res.json())
-        .then(data=>renderConfirmationCard(data, element[1]))
-        .then(renderCustomer(customer))
-}
+fetchData(renderConfirmationCard, shop);
+renderCustomer(customer);
 
 function renderConfirmationCard(element, quantity) {
     const confirmationCard = document.createElement('div');
@@ -34,7 +30,8 @@ function renderConfirmationCard(element, quantity) {
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <p class="title">${element.title}</p>
+                            <p>${element.title}</p>
+                            <p class="small">${element.description}</p>
                             <p class="small text-muted">${element.category}</p>
                         </div>
                         <div>
