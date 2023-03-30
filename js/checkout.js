@@ -7,7 +7,6 @@ let totalPrice = 0;
 
 if (shop != null) {
     shop.forEach(getProducts);
-    priceLocation.innerText = `Total Sum: $${totalPrice.toFixed(2)}`;
 } else {
     priceLocation.innerText = `Your cart is empty`;
 }
@@ -213,4 +212,5 @@ function renderCheckoutCard(element, quantity) {
     document.querySelector('.checkout').appendChild(checkoutCard);
 
     totalPrice += element.price * quantity;
+    priceLocation.innerText = `Total Sum: $${totalPrice.toFixed(2)}`;
 }
