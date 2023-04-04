@@ -1,13 +1,14 @@
 "use strict";
 import { fetchData } from "./fetch.js";
 
-let shop = []
+sessionStorage.clear();
 
 //fetch data from API
 fetchData(renderProductCard);
 
 //add to checkout function
 function addToCheckout(id, quantity) {
+  let shop = []
   let item = [id, quantity]
   shop.push(item);
   localStorage.setItem('shop', JSON.stringify(shop));
