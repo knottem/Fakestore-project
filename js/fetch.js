@@ -6,15 +6,17 @@ export function fetchData(functionName, shop = null, text = null) {
   const timeoutId = setTimeout(() => { controller.abort(); }, timeout);
 
 
-  let url1 = 'https://server.knotten.net/fakestore/';
-  let url2 = 'https://fakestoreapi.com/products/';
+  const url = 'https://server.knotten.net/fakestore/';
+  const url1 = 'https://fakestoreapi.com/products/';
 
   if (shop == null) {
+    let url2 = url;
+    let url3 = url1;
     if (text != null) {
-      url1 = url1 + text;
-      url2 = url2 + text;
+      url2 = url + text;
+      url3 = url1 + text;
     }
-    fetch(url1, { signal: controller.signal })
+    fetch(url2, { signal: controller.signal })
       .then(res => res.json())
       .then(data => {
         console.log("fetch success from primary API");
@@ -23,7 +25,7 @@ export function fetchData(functionName, shop = null, text = null) {
       })
       .catch(error => {
         console.log(`Failed to fetch from primary API: ${error}`);
-        fetch(url2, { signal: controller.signal })
+        fetch(url3, { signal: controller.signal })
           .then(res => res.json())
           .then(data => {
             console.log("fetch success from backup API");
@@ -42,9 +44,9 @@ export function fetchData(functionName, shop = null, text = null) {
       });
   } else {
     shop.forEach((element) => {
-      url1 = url1 + element[0];
-      url2 = url2 + element[0];
-      fetch(url1, { signal: controller.signal })
+      let url2 = url + element[0];
+      let url3 = url1 + element[0];
+      fetch(url2, { signal: controller.signal })
         .then(res => res.json())
         .then(data => {
           console.log("fetch success from primary API");
@@ -53,7 +55,7 @@ export function fetchData(functionName, shop = null, text = null) {
         })
         .catch(error => {
           console.log(`Failed to fetch from primary API: ${error}`);
-          fetch(url2, { signal: controller.signal })
+          fetch(url3, { signal: controller.signal })
             .then(res => res.json())
             .then(data => {
               console.log("fetch success from backup API");

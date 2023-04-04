@@ -185,7 +185,8 @@ function renderCheckoutCard(element, quantity) {
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
                         <div>
-                            <p class="title">${element.title}</p>
+                            <p>${element.title}</p>
+                            <p class="small">${element.description}</p>
                             <p class="small text-muted">${element.category}</p>
                         </div>
                         <div>
